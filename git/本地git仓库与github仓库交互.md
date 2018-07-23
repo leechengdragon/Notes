@@ -17,4 +17,22 @@
 
 #### 与github建立连接
 
-1.在 
+假设在github中建立了一个名叫Test的库，现在需要将本地库与该库连接并同步
+
+1.gitbash中输入
+
+>git remote add origin git@github.com:yourgithubusername/Test.git
+
+或者
+
+>git remote add origin https://github.com/yourgithubusername/Test.git
+
+第一种方式使用ssh协议，第二中方式使用http协议，推荐使用第一种方式，第二种方式每次提交时都会输入用户名和密码，很不方便
+
+2.推送代码
+
+>git push -u origin master
+
+3.获取代码
+
+>
