@@ -35,4 +35,4 @@
 
 3.获取代码
 
->
+>git pull --rebase remote origin
