@@ -85,6 +85,6 @@ var createIndexResponse = client.CreateIndex("myindex", c => c
     )
 );
 ```
-两者的区别在于automap的位置不同，因为automap方法是[幂等](https://github.com/leechengdragon/Notes/blob/master/elasticsearch/幂等性.md)的，所以放在前和放在后效果是一样的
+两者的区别在于automap的位置不同，因为automap方法是[幂等](https://github.com/leechengdragon/Notes/blob/master/幂等性.md)的，所以放在前和放在后效果是一样的
 
 不同匹配模式的混用就会有一个优先级的问题，优先级高的操作会覆盖优先级低的操作，fluent mapping > attribute mapping > auto mapping
