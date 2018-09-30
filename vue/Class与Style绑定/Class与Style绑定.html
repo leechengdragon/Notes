@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.min.js"></script>
+    <title>Document</title>
+    <style>
+        .customStyle {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .customStyle2 {
+            color: purple;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="example">
+        <span class="static" v-bind:class="classSetting"></span>
+        <span v-bind:class="[isActive,isEnable]"></span>
+        <span v-bind:class="[customStyle,customStyle2]">test</span>
+        <span v-bind:style="styleObject">test2</span>
+        <span v-bind:style="[customStyle3,customStyle4]">test3</span>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#example',
+            data: {
+                classSetting: {
+                    isActive: false,
+                    isEnable: true
+                },
+                isActive: 'active',
+                isEnable: 'enable',
+                customStyle: 'customStyle',
+                customStyle2: 'customStyle2',
+                styleObject: {
+                    fontSize: '20px',
+                    color: 'yellow'
+                },
+                customStyle4: {
+                    color: 'blue',
+                    fontWeight: 'bold'
+                },
+                customStyle3: {
+                    color: 'purple',
+                    fontSize: '20px'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
