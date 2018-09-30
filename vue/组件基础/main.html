@@ -7,30 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>组件基础</title>
     <script src="../vue.min.js"></script>
+    <script>
+        Vue.component('button-counter',{
+            data:function(){
+                return{
+                    count:0
+                }
+            },
+            template:`<button v-on:click="count++">You click me {{count}} times</button>`
+        })
+    
+        new Vue({el:'#component-demo'});
+    </script>
 </head>
-<script>
-    Vue.component('button-counter', {
-        data: function () {
-            return {
-                count: 0
-            }
-        },
-        template: `<button v-on:click="count++">
-                        you clicked me {{count}} times.
-                 </button>`
-    })
-</script>
-
 <body>
-    <div id="components-demo">
-        <button-counter></button-counter>
-        <button-counter></button-counter>
-        <button-counter></button-counter>
+    <div id="component-demo">
+       <button-counter></button-counter>
     </div>
 </body>
-<script>
-    new Vue({
-        el:'#components-demo'
-    })
-</script>
+
 </html>
