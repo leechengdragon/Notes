@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>条件渲染</title>
+    <script src="../vue.min.js"></script>
+</head>
+
+<body>
+    <div id="example">
+        <div v-if="value=='A'">
+            <span>temp&lt;1</span>
+        </div>
+        <div v-else-if="value=='B'">
+            <span>1&lt;temp&lt;2</span>
+        </div>
+        <div v-else>
+            <span>temp&gt;2</span>
+        </div>
+    </div>
+
+    <br>
+    <div id="example2">
+        <template v-if="loginType=='username'">
+            <label for="">username</label>
+            <input type="text" placeholder="input your username" key="username-input"> 
+        </template>
+        <template v-else>
+            <label for="">email</label>
+            <input type="text" placeholder="input your email" key="email-input">
+        </template>
+        <input type="button" value="changelogintype" v-on:click="changeLoginType">
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: '#example',
+        data:{
+            value:'A'
+        },
+       
+    })
+
+    let vm2=new Vue({
+        el:'#example2',
+        data:{
+            loginType:'username'
+        },
+        methods:{
+            changeLoginType:function(){
+                if(this.loginType==='username'){
+                    this.loginType='email';
+                }else{
+                    this.loginType='username';
+                }
+            }
+        }
+    })
+</script>
+
+</html>

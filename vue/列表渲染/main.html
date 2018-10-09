@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>列表渲染</title>
+    <script src="../vue.min.js"></script>
+</head>
+
+<body>
+    <div id="example">
+        <ul>
+            <li v-for="item in items">{{item.message}}</li>
+        </ul>
+        <ul>
+            <li v-for="(item,index) in items">
+                {{item.message}}-{{index}}
+            </li>
+        </ul>
+    </div>
+    <div id="example1">
+        <ul>
+            <li v-for="obj in object">{{obj}}</li>
+        </ul>
+        <ul>
+            <li v-for="(obj,key,index) in object">
+                {{index}}-{{key}}-{{obj}}
+            </li>
+        </ul>
+    </div>
+    <div id="example2">
+        <ul>
+            <li v-for="item in items">{{item}}</li>
+        </ul>
+        <ul>
+            <li v-for="item in evenItems">{{item}}</li>
+        </ul>
+        <ul>
+            <li v-for="item in getEvenItems(items)">{{item}}</li>
+        </ul>
+        <span v-for="n in 10">{{n}}</span>
+    </div>
+    <div id="example3">
+        <ul>
+            <li v-for="item in items" v-if="item.isComplate">{{item.itemName}}</li>
+        </ul>
+    </div>
+</body>
+<script>
+    let example = new Vue({
+        el: '#example',
+        data: {
+            items: [
+                { message: 'item1' },
+                { message: 'item2' }
+            ]
+        }
+    })
+
+    let example1 = new Vue({
+        el: '#example1',
+        data: {
+            object: {
+                firstname: 'Hello',
+                lastname: 'world',
+                age: 12
+            }
+        }
+    })
+
+    let example2 = new Vue({
+        el: '#example2',
+        data: {
+            items: [1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        computed: {
+            evenItems: function () {
+                return this.items.filter(function (item) {
+                    return item % 2 === 0
+                })
+            }
+        },
+        methods: {
+            getEvenItems: function (items) {
+                return items.filter(function (item) {
+                    return item % 2 === 0;
+                })
+            }
+        }
+    })
+
+    let example3 = new Vue({
+        el: '#example3',
+        data: {
+            items: [
+                {
+                    itemName: 'test1',
+                    isComplate: true
+                },
+                {
+                    itemName: 'test2',
+                    isComplate: true
+                },
+                {
+                    itemName: 'test3',
+                    isComplate: false
+                },
+                {
+                    itemName: 'test4',
+                    isComplate: false
+                },
+                {
+                    itemName: 'test5',
+                    isComplate: true
+                },
+            ]
+        },
+    })
+</script>
+
+</html>
