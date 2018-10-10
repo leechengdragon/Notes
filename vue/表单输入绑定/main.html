@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单输入绑定</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="example">
+        <input type="text" value="123" v-model="message">
+        <span>{{message}}</span>
+        <br>
+        <input type="checkbox" v-model="checked">
+        <span>is checked:{{checked}}</span>
+        <br>
+        <label for="jack" >jack</label>
+        <input type="checkbox" id="jack" value="jack" v-model="names">
+        <label for="lisa" >lisa</label>
+        <input type="checkbox" id="lisa" value="lisa" v-model="names">
+        <label for="nick" >nick</label>
+        <input type="checkbox" id="nick" value="nick" v-model="names">
+        <span>{{names}}</span>
+        <br>
+        <select name="" id="" v-model="testo">
+            <option value="test1">test1</option>
+            <option value="test2">test2</option>
+            <option value="test3">test3</option>
+        </select>
+        <span>selected:{{testo}}</span>
+        <br>
+        <select name="" id="" v-model="selected">
+            <option v-bind:value="item.message" v-for="item in items">{{item.message}}</option>
+        </select>
+        <span>selected:{{selected}}</span>
+        <br>
+        <input type="number" v-model.number="num">
+        <span>{{num}}</span>
+    </div>
+    <script>
+        let example=new Vue({
+            el:'#example',
+            data:{
+                message:'',
+                checked:false,
+                names:[],
+                testo:'',
+                selected:'',
+                items:[
+                    {id:1,message:'test1'},
+                    {id:2,message:'test2'},
+                    {id:3,message:'test3'},
+                    {id:4,message:'test4'},
+                    {id:5,message:'test5'},
+                ],
+                num:0
+            }
+        })
+    </script>
+</body>
+</html>
