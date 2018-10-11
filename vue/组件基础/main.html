@@ -7,23 +7,125 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>组件基础</title>
     <script src="../vue.min.js"></script>
-    <script>
-        Vue.component('button-counter',{
-            data:function(){
-                return{
-                    count:0
-                }
-            },
-            template:`<button v-on:click="count++">You click me {{count}} times</button>`
-        })
-    
-        new Vue({el:'#component-demo'});
-    </script>
 </head>
+
 <body>
     <div id="component-demo">
-       <button-counter></button-counter>
+        <count-button></count-button>
     </div>
+    <div id="example1">
+        <blog-post title="test1"></blog-post>
+        <blog-post title="test2"></blog-post>
+        <blog-post title="test3"></blog-post>
+    </div>
+    <div id="example2">
+        <blog-post v-for="post in posts" v-bind:title="post.title"></blog-post>
+    </div>
+    <div id="example3">
+        <blog-advance v-for="post in posts" v-bind:post="post"></blog-advance>
+    </div>
+    <br>
+    <div id="example4">
+        <div v-for="post in posts" v-bind:style="{fontSize:fontSize+'em'}">
+            <fontsetting-blog v-on:enlarge-text="fontSize+=$event" v-bind:post="post"></fontsetting-blog>
+        </div>
+    </div>
+    <div id="example5">
+        <component-model v-model="message"></component-model>
+        <span>{{message}}</span>
+    </div>
+    <script>
+        Vue.component('count-button', {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: `<button v-on:click="count++">{{count}}</button>`
+        })
+
+        Vue.component('blog-post', {
+            props: ['title'],
+            template: `<h3>{{title}}</h3>`
+        })
+
+        Vue.component('blog-advance', {
+            props: [
+                'post'
+            ],
+            template: `
+                <div v-bind:id="post.id">
+                    <h3>{{post.title}}</h3>
+                    <p v-html="post.content"></p>
+                </div>
+            `
+        })
+
+        Vue.component('fontsetting-blog', {
+            props: ['post'],
+            template: `
+                <div v-bind:id="post.id">
+                    <h3>{{post.title}}</h3>
+                    <button v-on:click="$emit('enlarge-text',0.1)">elarge font size</button>
+                    <p v-html="post.content"></p>
+                </div>
+            `
+        })
+
+        Vue.component('component-model',{
+            props:['value'],
+            template:`<input v-on:input="$emit('input',$event.target.value)"></input>`
+        })
+
+        let example = new Vue({
+            el: '#component-demo'
+        })
+
+        let example1 = new Vue({
+            el: '#example1'
+        })
+
+        let example2 = new Vue({
+            el: '#example2',
+            data: {
+                posts: [
+                    { id: 1, title: 'test1' },
+                    { id: 2, title: 'test2' },
+                    { id: 3, title: 'test3' },
+                ]
+            }
+        })
+
+        let example3 = new Vue({
+            el: '#example3',
+            data: {
+                posts: [
+                    { id: 1, title: 'test1', content: '<span style="color:yellow">yesterday</span> is a good day' },
+                    { id: 2, title: 'test2', content: '<span style="color:blue">today</span> is a good day' },
+                    { id: 3, title: 'test3', content: '<span style="color:purple">tomorrow</span> is a good day' },
+                ]
+            }
+        })
+
+        let example4 = new Vue({
+            el: '#example4',
+            data: {
+                fontSize: 1,
+                posts: [
+                    { id: 1, title: 'test1', content: '<span style="color:yellow">yesterday</span> is a good day' },
+                    { id: 2, title: 'test2', content: '<span style="color:blue">today</span> is a good day' },
+                    { id: 3, title: 'test3', content: '<span style="color:purple">tomorrow</span> is a good day' },
+                ]
+            }
+        }) 
+
+        let example5=new Vue({
+            el:'#example5',
+            data:{
+                message:''
+            }
+        })  
+    </script>
 </body>
 
 </html>
